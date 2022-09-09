@@ -30,7 +30,7 @@ deliver:
         -
             - <ANALYSISPATH>/seqreports/*
             - <STAGINGPATH>/00-Reports/SequenceQC/
-            - 
+            -
               required: True
         -
             - {{ ngi_softlinks }}/apply_recalibration.sh
@@ -45,19 +45,24 @@ deliver:
         -
             - {{ ngi_softlinks }}/DELIVERY.README.SAREK.txt
             - <STAGINGPATH>
-            - 
+            -
               required: True
               no_digest_cache: True
         -
-{% if "_batch_" in config_dst %}
-            - <ANALYSISPATHRESULTS>/Reports/MultiQC/*
+{% if site == "upps" %}
+            - <ANALYSISPATH>/multiqc_ngi/*multiqc_report*
 {% elif site == "sthlm" %}
             - <ANALYSISPATH>/*multiqc_report.html
-{% elif site == "upps" %}
-            - <ANALYSISPATH>/multiqc_ngi/*multiqc_report*
+{% endif %}
+{% if "_batch_" in config_dst %}
+            - <STAGINGPATH>/00-Reports/
+            -
+              required: False
+        -
+            - <ANALYSISPATHRESULTS>/Reports/MultiQC/*
 {% endif %}
             - <STAGINGPATH>/00-Reports/
-            - 
+            -
               required: True
 {% if "sthlm" == site %}
     files_to_deliver:
@@ -73,35 +78,35 @@ deliver:
         -
             - <ANALYSISPATHRESULTS>/Annotation/<SAMPLEID>/*
             - <STAGINGPATHRESULTS>/Annotation/
-            - 
+            -
               required: True
         -
             - <ANALYSISPATHRESULTS>/pipeline_info/results_description.html
             - <STAGINGPATHRESULTS>/pipeline_info
-            - 
+            -
               required: True
         -
             - <ANALYSISPATHRESULTS>/pipeline_info/software_versions.csv
             - <STAGINGPATHRESULTS>/pipeline_info
-            - 
+            -
               required: True
         -
             - <ANALYSISPATHRESULTS>/Preprocessing/TSV/duplicates_marked*<SAMPLEID>.tsv*
             - <STAGINGPATHRESULTS>/Preprocessing/TSV
-            - 
+            -
               required: True
         -
             - <ANALYSISPATHRESULTS>/Preprocessing/<SAMPLEID>/DuplicatesMarked/*
             - <STAGINGPATHRESULTS>/Preprocessing/DuplicatesMarked
-            - 
+            -
               required: True
         -
-            - <ANALYSISPATHRESULTS>/Reports/<SAMPLEID>*/*
-            - <STAGINGPATHRESULTS>/Reports
-            - 
+            - <ANALYSISPATHRESULTS>/Reports/<SAMPLEID>/*
+            - <STAGINGPATHRESULTS>/Reports/<SAMPLEID>/
+            -
               required: True
         -
             - <ANALYSISPATHRESULTS>/VariantCalling/<SAMPLEID>/*
             - <STAGINGPATHRESULTS>/VariantCalling/
-            - 
+            -
               required: True
