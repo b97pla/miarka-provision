@@ -43,12 +43,6 @@ deliver:
             - {{ ngi_softlinks }}/ACKNOWLEDGEMENTS.txt
             - <STAGINGPATH>
         -
-            - {{ ngi_softlinks }}/DELIVERY.README.SAREK.txt
-            - <STAGINGPATH>
-            -
-              required: True
-              no_digest_cache: True
-        -
 {% if site == "upps" %}
             - <ANALYSISPATH>/multiqc_ngi/*multiqc_report*
 {% elif site == "sthlm" %}
@@ -64,6 +58,16 @@ deliver:
             - <STAGINGPATH>/00-Reports/
             -
               required: True
+        -
+{% if "_batch_" in config_dst %}
+            - {{ ngi_softlinks }}/DELIVERY.README.SAREK.BATCH.txt
+{% else %}
+            - {{ ngi_softlinks }}/DELIVERY.README.SAREK.txt
+{% endif %}
+            - <STAGINGPATH>/DELIVERY.README.SAREK.txt
+            -
+              required: True
+              no_digest_cache: True
 {% if "sthlm" == site %}
     files_to_deliver:
         -
@@ -101,12 +105,20 @@ deliver:
             -
               required: True
         -
-            - <ANALYSISPATHRESULTS>/Reports/<SAMPLEID>/*
-            - <STAGINGPATHRESULTS>/Reports/<SAMPLEID>/
-            -
-              required: True
-        -
             - <ANALYSISPATHRESULTS>/VariantCalling/<SAMPLEID>/*
             - <STAGINGPATHRESULTS>/VariantCalling/
             -
               required: True
+{% if "_batch_" in config_dst %}
+        -
+            - <ANALYSISPATHRESULTS>/Reports/<SAMPLEID>/*
+            - <STAGINGPATHRESULTS>/Reports/<SAMPLEID>/
+            -
+              required: True
+{% else %}
+        -
+            - <ANALYSISPATHRESULTS>/Reports/*
+            - <STAGINGPATHRESULTS>/Reports
+            -
+              required: True
+{% endif %}
