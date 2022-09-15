@@ -44,17 +44,14 @@ deliver:
             - <STAGINGPATH>
         -
 {% if site == "upps" %}
-            - <ANALYSISPATH>/multiqc_ngi/*multiqc_report*
-{% elif site == "sthlm" %}
-            - <ANALYSISPATH>/*multiqc_report.html
-{% endif %}
-{% if "_batch_" in config_dst %}
+            - <ANALYSISPATH>/multiqc_ngi/*multiqc_report_data.zip
             - <STAGINGPATH>/00-Reports/
             -
-              required: False
+              required: True
         -
-            - <ANALYSISPATHRESULTS>/Reports/MultiQC/*
-{% endif %}
+            - <ANALYSISPATH>/multiqc_ngi/*multiqc_report.html
+{% elif site == "sthlm" %}
+            - <ANALYSISPATH>/*multiqc_report.html
             - <STAGINGPATH>/00-Reports/
             -
               required: True
@@ -64,7 +61,7 @@ deliver:
 {% else %}
             - {{ ngi_softlinks }}/DELIVERY.README.SAREK.txt
 {% endif %}
-            - <STAGINGPATH>/DELIVERY.README.SAREK.txt
+            - <STAGINGPATH>/
             -
               required: True
               no_digest_cache: True
