@@ -18,7 +18,7 @@
     version: "{{ archive_verify_version }}"
 
 - name: install archive-verify requirements
-  command: pipenv install --deploy
+  command: pipenv install --system --deploy
   args:
     chdir: "{{ arteria_service_src_path }}"
   environment:
