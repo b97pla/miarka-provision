@@ -21,7 +21,7 @@
   command: pipenv install --deploy
   args:
     chdir: "{{ arteria_service_src_path }}"
+    creates: "{{ arteria_service_src_path }}/.venv"
   environment:
     PATH: "{{ arteria_service_env_root }}/bin:{{ tools_path.PATH }}"
     PIPENV_VENV_IN_PROJECT: 1
-  creates: "{{ arteria_service_src_path }}/.venv"
