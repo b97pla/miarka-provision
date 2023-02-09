@@ -68,15 +68,15 @@
     dest: "{{ supervisord_conf }}"
     section: program:redis-worker
     option: command
-    value: "{{ arteria_service_env_root }}/bin/rq worker"
+    value: "{{ arteria_service_env_root }}/bin/pipenv run rq worker"
     backup: no
 
 - name: modify uppsala's supervisord conf to start redis-worker
   ini_file:
     dest: "{{ supervisord_conf }}"
     section: program:redis-worker
-    option: command
-    value: "{{ arteria_service_env_root }}/bin/rq worker"
+    option: autorestart
+    value: true
     backup: no
 
 - name: modify uppsala's supervisord conf to start redis-worker
