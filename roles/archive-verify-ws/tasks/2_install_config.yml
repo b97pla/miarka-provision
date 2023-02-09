@@ -28,9 +28,17 @@
     dest: "{{ supervisord_conf }}"
     section: program:{{ arteria_service_name }}-{{ deployment_environment }}
     option: command
-    value: "{{ arteria_service_env_root }}/bin/python {{ arteria_service_src_path }}/archive-verify-ws --configroot={{ arteria_service_config_root }}"
+    value: "{{ arteria_service_env_root }}/bin/pipenv run {{ arteria_service_src_path }}/archive-verify-ws --configroot={{ arteria_service_config_root }}"
     backup: no
- 
+
+- name: modify uppsala's supervisord conf to start {{ arteria_service_name }}
+  ini_file:
+    dest: "{{ supervisord_conf }}"
+    section: program:{{ arteria_service_name }}-{{ deployment_environment }}
+    option: environment
+    value: PIPENV_VENV_IN_PROJECT="1"
+    backup: no
+
 - name: modify uppsala's supervisord conf to start {{ arteria_service_name }}
   ini_file: 
     dest: "{{ supervisord_conf }}"
@@ -67,6 +75,14 @@
   ini_file:
     dest: "{{ supervisord_conf }}"
     section: program:redis-worker
-    option: autorestart
-    value: true
+    option: command
+    value: "{{ arteria_service_env_root }}/bin/rq worker"
+    backup: no
+
+- name: modify uppsala's supervisord conf to start redis-worker
+  ini_file:
+    dest: "{{ supervisord_conf }}"
+    section: program:redis-worker
+    option: environment
+    value: PIPENV_VENV_IN_PROJECT="1"
     backup: no

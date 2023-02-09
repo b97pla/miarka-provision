@@ -17,16 +17,11 @@
     dest: "{{ arteria_service_src_path }}"
     version: "{{ archive_verify_version }}"
 
-- name: create pip lockfile
-  command: pipenv lock
-  args:
-    chdir: "{{ arteria_service_src_path }}"
-  environment:
-    PATH: "{{ arteria_service_env_root }}/bin:{{ tools_path.PATH }}"
-
 - name: install archive-verify requirements
-  command: pipenv install --system --deploy
+  command: pipenv install --deploy
   args:
     chdir: "{{ arteria_service_src_path }}"
   environment:
     PATH: "{{ arteria_service_env_root }}/bin:{{ tools_path.PATH }}"
+    PIPENV_VENV_IN_PROJECT: 1
+  creates: "{{ arteria_service_src_path }}/.venv"
