@@ -5,6 +5,9 @@ base_url: "/api/1.0"
 verify_root_dir: {{ archive_verify_path_to_verify_root }}
 pdc_root_dir: "{}/"
 dsmc_log_dir: {{ arteria_service_log_dir }}
+dsmc_extra_args:
+  servername: {{ pdc_archive_servername }}
+
 # maximum run-time for a job
 job_timeout: "48h"
 # maximum time to keep a job in the queue

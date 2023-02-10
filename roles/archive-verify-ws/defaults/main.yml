@@ -1,7 +1,7 @@
 ---
 
 archive_verify_repo: https://github.com/b97pla/snpseq-archive-verify.git
-archive_verify_version: a777b708109e0c58ea33e89d3d2693b75d70cc1d
+archive_verify_version: cd3041fe0d9be5ad762450b392fb83a4493847fc
 arteria_service_name: archive-verify-ws
 
 archive_verify_redis_server_version: 7.0.4
