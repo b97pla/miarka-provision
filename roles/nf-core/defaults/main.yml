@@ -47,7 +47,7 @@ pipelines:
     release: 2.6.0
     container_dir: "{{ biocontainers_dirname }}"
   - name: rnafusion
-    release: 2.3.4
+    release: 3.0.1
     container_dir: "{{ biocontainers_dirname }}"
   - name: nanoseq
     release: 3.1.0

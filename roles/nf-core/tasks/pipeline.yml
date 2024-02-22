@@ -79,6 +79,32 @@
     when: not silva_stat.stat.exists
   when: pipeline == "ampliseq"
 
+- name: download rnafusion requirements
+  block:
+
+  - name: create directory for {{ pipeline }}  resources
+    file:
+      path: "{{ ngi_containers }}/{{ pipeline }}"
+      state: directory
+
+  - name: download fusion_report_db
+    command: "nextflow run 
+    {{ sw_path }}/{{ pipeline }}/workflow/
+    -profile singularity 
+    --build_references 
+    --all 
+    --cosmic_username pontus.larsson@medsci.uu.se 
+    --cosmic_passwd Buffing-Cassette4-Remorse 
+    --outdir {{ ngi_containers }}/{{ pipeline }} 
+    --genomes_base {{ ngi_containers }}/{{ pipeline }}"
+    environment: "{{ nf_core_vars }}"
+    ignore_errors: true
+    args:
+      chdir: "{{ nf_core_vars.APPTAINER_TMPDIR }}"
+      creates: "{{ ngi_containers }}/{{ pipeline }}/fusion_report_db"
+
+  when: pipeline == "rnafusion"
+
 - name: Remove singularity cache directories
   file:
     name: "{{ cachedir }}"
