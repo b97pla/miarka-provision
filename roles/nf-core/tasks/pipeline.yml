@@ -68,7 +68,7 @@
 
 - name: execute pipeline-specific includes
   include_tasks: "{{ pipeline }}_include.yml"
-  vars: "{{ dict(extra_parameters) }}"
+  vars: "{{ extra_parameters | dictsort | dict }}"
   when: include_stat.stat.exists
 
 - name: Remove singularity cache directories
