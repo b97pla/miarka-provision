@@ -10,7 +10,7 @@
     url: "{{ ncbi_eutils_url }}/efetch.fcgi?db=nuccore&rettype=fasta&retmode=text&id={{ item.accession }}"
     dest: "{{ ngi_containers }}/{{ pipeline }}/{{ item.name }}_{{ item.accession }}.fa"
     checksum: sha1:{{ item.sha1 }}
-  with_items: "{{ references }}"
+  with_items: "{{ extra_parameters.references }}"
 
 # add methylseq-specific options to pipeline nextflow config
 - block:
@@ -32,7 +32,7 @@
             fasta = "{{ ngi_containers }}/{{ pipeline }}/{{ item.name }}_{{ item.accession }}.fa"
           }
       backup: no
-    with_items: "{{ references }}"
+    with_items: "{{ extra_parameters.references }}"
 
   - name: add specific parameters to {{ site }} {{ pipeline }} nextflow config - 3
     lineinfile:
