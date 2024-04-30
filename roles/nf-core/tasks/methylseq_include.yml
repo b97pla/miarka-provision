@@ -6,6 +6,9 @@
 
 - debug:
     var: reference
+  with_items: extra_parameters.references
+  loop_control:
+    loop_var: reference
 
 # the eutils service will only tolerate 3 requests / second so make sure not to exceed this
 - name: download FASTA references
