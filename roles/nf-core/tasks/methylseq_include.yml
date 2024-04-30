@@ -4,19 +4,13 @@
     path: "{{ ngi_containers }}/{{ pipeline }}"
     state: directory
 
-- debug:
-    var: reference
-  with_items: "{{ extra_parameters.references }}"
-  loop_control:
-    loop_var: reference
-
 # the eutils service will only tolerate 3 requests / second so make sure not to exceed this
 - name: download FASTA references
   get_url:
     url: "{{ ncbi_eutils_url }}/efetch.fcgi?db=nuccore&rettype=fasta&retmode=text&id={{ reference.accession }}"
     dest: "{{ ngi_containers }}/{{ pipeline }}/{{ reference.name }}_{{ reference.accession }}.fa"
     checksum: "sha1:{{ reference.sha1 }}"
-  with_items: extra_parameters.references
+  with_items: "{{ extra_parameters.references }}"
   loop_control:
     loop_var: reference
 
@@ -32,7 +26,7 @@
     dest: "{{ ngi_pipeline_conf }}/{{ pipeline }}_{{ site }}.config"
     line: "'{{ reference.name }}' { fasta = \"{{ ngi_containers }}/{{ pipeline }}/{{ reference.name }}_{{ reference.accession }}.fa\" }"
     backup: no
-  with_items: extra_parameters.references
+  with_items: "{{ extra_parameters.references }}"
   loop_control:
     loop_var: reference
 
