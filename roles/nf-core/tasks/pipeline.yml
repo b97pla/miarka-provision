@@ -63,7 +63,7 @@
     get_attributes: no
     get_checksum: no
     get_mime: no
-    path: "{{ pipeline }}_include.yml"
+    path: "{{ role_path }}/tasks/{{ pipeline }}_include.yml"
   register: include_stat
 
 - name: execute pipeline-specific includes
