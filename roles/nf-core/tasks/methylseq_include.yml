@@ -18,10 +18,7 @@
   - name: add specific parameters to {{ site }} {{ pipeline }} nextflow config - 1
     lineinfile:
       dest: "{{ ngi_pipeline_conf }}/{{ pipeline }}_{{ site }}.config"
-      line: >
-        params {
-          // custom FASTA reference paths
-          genomes {
+      line: "params { genomes { "
       backup: no
 
   - name: add specific parameters to {{ site }} {{ pipeline }} nextflow config - 2
@@ -37,7 +34,5 @@
   - name: add specific parameters to {{ site }} {{ pipeline }} nextflow config - 3
     lineinfile:
       dest: "{{ ngi_pipeline_conf }}/{{ pipeline }}_{{ site }}.config"
-      line: >
-        }
-      }
+      line: " } }"
     backup: no
