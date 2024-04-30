@@ -18,7 +18,7 @@
 - name: "add specific parameters to {{ site }} {{ pipeline }} nextflow config - 1"
   lineinfile:
     dest: "{{ ngi_pipeline_conf }}/{{ pipeline }}_{{ site }}.config"
-    line: >
+    line: |
       params { 
         genomes {
     backup: no
@@ -26,7 +26,7 @@
 - name: "add specific parameters to {{ site }} {{ pipeline }} nextflow config - 2"
   lineinfile:
     dest: "{{ ngi_pipeline_conf }}/{{ pipeline }}_{{ site }}.config"
-    line: >
+    line: |
           '{{ reference.name }}' { 
             fasta = "{{ ngi_containers }}/{{ pipeline }}/{{ reference.name }}_{{ reference.accession }}.fa"
           }
@@ -38,7 +38,7 @@
 - name: "add specific parameters to {{ site }} {{ pipeline }} nextflow config - 3"
   lineinfile:
     dest: "{{ ngi_pipeline_conf }}/{{ pipeline }}_{{ site }}.config"
-    line: >
+    line: |
         }
       }
     backup: no
