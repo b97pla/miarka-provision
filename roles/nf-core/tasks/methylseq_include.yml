@@ -6,7 +6,7 @@
 
 - debug:
     var: reference
-  with_items: extra_parameters.references
+  with_items: "{{ extra_parameters.references }}"
   loop_control:
     loop_var: reference
 
