@@ -13,26 +13,25 @@
   with_items: "{{ extra_parameters.references }}"
 
 # add methylseq-specific options to pipeline nextflow config
-- block:
 
-  - name: "add specific parameters to {{ site }} {{ pipeline }} nextflow config - 1"
-    lineinfile:
-      dest: "{{ ngi_pipeline_conf }}/{{ pipeline }}_{{ site }}.config"
-      line: "params { genomes { "
-      backup: no
-
-  - name: "add specific parameters to {{ site }} {{ pipeline }} nextflow config - 2"
-    lineinfile:
-      dest: "{{ ngi_pipeline_conf }}/{{ pipeline }}_{{ site }}.config"
-      line: >   
-          '{{ item.name }}' {
-            fasta = "{{ ngi_containers }}/{{ pipeline }}/{{ item.name }}_{{ item.accession }}.fa"
-          }
-      backup: no
-    with_items: "{{ extra_parameters.references }}"
-
-  - name: "add specific parameters to {{ site }} {{ pipeline }} nextflow config - 3"
-    lineinfile:
-      dest: "{{ ngi_pipeline_conf }}/{{ pipeline }}_{{ site }}.config"
-      line: " } }"
+- name: "add specific parameters to {{ site }} {{ pipeline }} nextflow config - 1"
+  lineinfile:
+    dest: "{{ ngi_pipeline_conf }}/{{ pipeline }}_{{ site }}.config"
+    line: "params { genomes { "
     backup: no
+
+- name: "add specific parameters to {{ site }} {{ pipeline }} nextflow config - 2"
+  lineinfile:
+    dest: "{{ ngi_pipeline_conf }}/{{ pipeline }}_{{ site }}.config"
+    line: >   
+        '{{ item.name }}' {
+          fasta = "{{ ngi_containers }}/{{ pipeline }}/{{ item.name }}_{{ item.accession }}.fa"
+        }
+    backup: no
+  with_items: "{{ extra_parameters.references }}"
+
+- name: "add specific parameters to {{ site }} {{ pipeline }} nextflow config - 3"
+  lineinfile:
+    dest: "{{ ngi_pipeline_conf }}/{{ pipeline }}_{{ site }}.config"
+    line: " } }"
+  backup: no
