@@ -4,6 +4,9 @@
     path: "{{ ngi_containers }}/{{ pipeline }}"
     state: directory
 
+- debug:
+    var: reference
+
 # the eutils service will only tolerate 3 requests / second so make sure not to exceed this
 - name: download FASTA references
   get_url:
