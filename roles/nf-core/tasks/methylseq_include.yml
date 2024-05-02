@@ -27,9 +27,9 @@
   lineinfile:
     dest: "{{ ngi_pipeline_conf }}/{{ pipeline }}_{{ site }}.config"
     line: |
-          '{{ reference.name }}' { 
-            fasta = "{{ ngi_containers }}/{{ pipeline }}/{{ reference.name }}_{{ reference.accession }}.fa"
-          }
+      '{{ reference.name }}' { 
+        fasta = "{{ ngi_containers }}/{{ pipeline }}/{{ reference.name }}_{{ reference.accession }}.fa"
+      }
     backup: no
   with_items: "{{ extra_parameters.references }}"
   loop_control:
@@ -39,6 +39,6 @@
   lineinfile:
     dest: "{{ ngi_pipeline_conf }}/{{ pipeline }}_{{ site }}.config"
     line: |
-      {{ '}}' }}
-      {{ '}}' }}
+      {{ '  }' }}
+      {{ '}' }}
     backup: no
