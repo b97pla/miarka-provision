@@ -39,6 +39,6 @@
   lineinfile:
     dest: "{{ ngi_pipeline_conf }}/{{ pipeline }}_{{ site }}.config"
     line: |
-      " {{ '}}' }}
-      {{ '}}' }}"
+      {{ '}}' }}
+      {{ '}}' }}
     backup: no
